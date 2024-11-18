@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.felantry'
+version = '0.1.1'
+description = 'TCentury Plugin for Minecraft'
+
+repositories {
+    mavenCentral()  // Стандартный репозиторий Maven
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/public/' }  // Репозиторий Spigot
+}
+
+dependencies {
+    // Локальная зависимость для Towny
+    implementation files('libs/Towny-0.100.4.0.jar')
+
+    // Локальная зависимость для Vault
+    implementation files('libs/Vault.jar')
+
+    // Зависимость для Spigot (или Paper, если используешь Paper сервер)
+    compileOnly 'org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('jar') {
+    manifest {
+        attributes(
+                'Main-Class': 'com.felantry.tcentury.TCenturyPlugin'
+        )
+    }
+}

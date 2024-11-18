@@ -1,0 +1,9 @@
+permissions:
+  bronze:
+    - WORKBENCH
+    - COAL_BLOCK
+  iron:
+    - IRON_SWORD
+    - DIAMOND_SWORD
+  end:
+    - '*'  # Разрешение на все предметы

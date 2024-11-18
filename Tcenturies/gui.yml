@@ -1,0 +1,12 @@
+menu_title: 'Меню Перехода Веков'
+size: 9
+'next_era':
+  material: DIAMOND_SWORD
+  slot: 0
+  lore:
+    - '&7Переход в новый век'
+    - ''
+    - '&7- ЛКМ: &bПерейти в следующий век'
+  left_click_requirement:
+    - '[message] &aВы переходите в следующий век!'
+    - '[update-era] # Логика перехода в следующий век'

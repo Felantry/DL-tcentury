@@ -1,0 +1,4 @@
+# lang/en.yml
+messages:
+  gui_title: 'Century Menu'
+  action: 'Action: %action%'

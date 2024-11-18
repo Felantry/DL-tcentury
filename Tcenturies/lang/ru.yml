@@ -1,0 +1,4 @@
+# lang/ru.yml
+messages:
+  gui_title: 'Меню Веков'
+  action: 'Действие: %action%'

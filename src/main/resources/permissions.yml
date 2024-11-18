@@ -1,0 +1,24 @@
+permissions:
+  # Базовые разрешения для плагина
+  tcentury.reload:
+    description: Перезагружать конфигурацию плагина
+    default: op
+
+  tcentury.version:
+    description: Просматривать версию плагина
+    default: op
+
+  tcenturies.use:
+    description: Открывать GUI меню для перехода в новый век
+    default: true
+
+  # Дополнительные разрешения для крафтов и переходов
+  tcentury.bronze:
+    description: Разрешает переход в бронзовый век
+    default: true
+  tcentury.iron:
+    description: Разрешает переход в железный век
+    default: op
+  tcentury.end:
+    description: Разрешает переход в последний век
+    default: op
