@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.felantry'
-version = '0.1.1'
+version = '0.2.2'
 description = 'TCentury Plugin for Minecraft'
 
 repositories {
@@ -12,10 +12,8 @@ repositories {
 }
 
 dependencies {
-    // Локальная зависимость для Towny
+    // Локальная зависимость
     implementation files('libs/Towny-0.100.4.0.jar')
-
-    // Локальная зависимость для Vault
     implementation files('libs/Vault.jar')
 
     // Зависимость для Spigot (или Paper, если используешь Paper сервер)

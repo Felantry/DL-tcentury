@@ -1,13 +1,13 @@
 name: TCentury
-version: 0.1.1
+version: 0.2.0
 author: Felantry
 main: com.felantry.tcentury.TCenturyPlugin
 api-version: 1.21
 commands:
   tcentury:
-    description: Команда для управления веками
+    description: Основная команда плагина.
     usage: /tcentury
 permissions:
-  tcentury.use:
-    description: Разрешение на использование команд плагина
-    default: true
+  tcentury.reload:
+    description: Разрешение на перезагрузку конфигурации.
+    default: op
