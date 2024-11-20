@@ -2,11 +2,11 @@ package com.felantry.tcentury;
 
 import com.felantry.tcentury.commands.TCenturyCommand;
 import com.felantry.tcentury.listeners.TCenturyListener;
+import com.felantry.tcentury.database.Database;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -14,13 +14,19 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.configuration.file.YamlConfiguration;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.io.File;
 import java.util.List;
 
 public class TCenturyPlugin extends JavaPlugin {
 
     private static Economy economy = null;
+    private final Database database = new Database();
 
     private File menuFile;
     private File craftingFile;
@@ -41,6 +47,8 @@ public class TCenturyPlugin extends JavaPlugin {
 
         getCommand("tcentury").setExecutor(new TCenturyCommand(this));
         getServer().getPluginManager().registerEvents(new TCenturyListener(this), this);
+
+        createTable();
     }
 
     @Override
@@ -119,17 +127,53 @@ public class TCenturyPlugin extends JavaPlugin {
     }
 
     public int getCurrentCentury(Player player) {
-        return player.getMetadata("century").isEmpty() ? 1 : player.getMetadata("century").get(0).asInt();
+        try (Connection connection = database.getConnection()) {
+            String query = "SELECT epoch FROM towny_cities WHERE city_name = ?";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, player.getDisplayName());
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt("epoch");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 1; // Default if no record is found
     }
 
-    public boolean isItemAllowedInCentury(ItemStack item, int century) {
-        List<String> allowedItems = craftingConfig.getStringList("centuries." + century + ".allowed-items");
-        return allowedItems.contains(item.getType().name());
+    public void setCityEpoch(String cityName, String epoch) {
+        try (Connection connection = database.getConnection()) {
+            String query = "INSERT INTO towny_cities (city_name, epoch) VALUES (?, ?) " +
+                    "ON DUPLICATE KEY UPDATE epoch = ?";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, cityName);
+                stmt.setString(2, epoch);
+                stmt.setString(3, epoch);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void advanceCentury(Player player) {
         int currentCentury = getCurrentCentury(player);
         player.setMetadata("century", new FixedMetadataValue(this, currentCentury + 1));
         player.sendMessage("Поздравляем! Вы перешли в новый век: " + (currentCentury + 1));
+    }
+
+    private void createTable() {
+        try (Connection connection = database.getConnection()) {
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS towny_cities (" +
+                    "city_name VARCHAR(100) PRIMARY KEY," +
+                    "epoch VARCHAR(50)" +
+                    ")";
+            try (PreparedStatement stmt = connection.prepareStatement(createTableSQL)) {
+                stmt.execute();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.felantry'
-version = '0.2.3'
+version = '0.3.0'
 description = 'TCentury Plugin for Minecraft'
 
 repositories {
@@ -15,6 +15,7 @@ dependencies {
     // Локальная зависимость
     implementation files('libs/Towny-0.100.4.0.jar')
     implementation files('libs/Vault.jar')
+    implementation 'com.h2database:h2:2.1.214'
 
     // Зависимость для Spigot (или Paper, если используешь Paper сервер)
     compileOnly 'org.spigotmc:spigot-api:1.21-R0.1-SNAPSHOT'

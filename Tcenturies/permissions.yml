@@ -5,4 +5,3 @@ permissions:
   iron:
     - IRON_SWORD
     - DIAMOND_SWORD
-  end:

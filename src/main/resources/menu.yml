@@ -7,3 +7,30 @@ menu:
       lore:
         - "ПКМ: Сдать предметы"
         - "ЛКМ: Проверить оставшееся"
+      action: "checkRemainingItems"
+    - id: 1
+      material: DIAMOND
+      name: "Средневековье"
+      lore:
+        - "ПКМ: Сдать предметы"
+        - "ЛКМ: Проверить оставшееся"
+      action: "checkRemainingItems"
+    - id: 2
+      material: GOLD_INGOT
+      name: "Индустриальная эпоха"
+      lore:
+        - "ПКМ: Сдать предметы"
+        - "ЛКМ: Проверить оставшееся"
+      action: "checkRemainingItems"
+
+# Определение команд для проверки сдачи и состояния
+commands:
+  checkRemainingItems: "/tc checkRemaining"
+  giveItems: "/tc giveItems"
+
+# Конфигурация для команд
+actions:
+  checkRemainingItems:
+    command: "/tc checkRemaining"
+    permission: "tcentury.check"
+    description: "Проверка оставшихся предметов"
