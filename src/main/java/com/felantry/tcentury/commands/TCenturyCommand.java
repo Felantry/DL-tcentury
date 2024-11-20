@@ -22,21 +22,21 @@ public class TCenturyCommand implements CommandExecutor {
                 plugin.openCenturyMenu(player);
                 return true;
             }
-            sender.sendMessage("Эта команда доступна только игрокам.");
+            sender.sendMessage("§cЭта команда доступна только игрокам.");
             return true;
         }
 
         if (args[0].equalsIgnoreCase("reload")) {
             if (sender.hasPermission("tcentury.reload")) {
                 plugin.reloadConfigs();
-                sender.sendMessage("Конфигурация плагина перезагружена!");
+                sender.sendMessage("§aКонфигурация плагина перезагружена!");
             } else {
-                sender.sendMessage("У вас нет прав на выполнение этой команды.");
+                sender.sendMessage("§4У вас нет прав на выполнение этой команды.");
             }
             return true;
         }
 
-        sender.sendMessage("Неизвестная команда.");
+        sender.sendMessage("§cНеизвестная команда.");
         return true;
     }
 }

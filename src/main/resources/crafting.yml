@@ -1,0 +1,9 @@
+centuries:
+  1:
+    allowed-items:
+      - WOODEN_AXE
+      - WOODEN_PICKAXE
+  2:
+    allowed-items:
+      - STONE_AXE
+      - STONE_PICKAXE

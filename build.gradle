@@ -3,7 +3,7 @@ plugins {
 }
 
 group = 'com.felantry'
-version = '0.2.2'
+version = '0.2.3'
 description = 'TCentury Plugin for Minecraft'
 
 repositories {

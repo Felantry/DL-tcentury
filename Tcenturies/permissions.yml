@@ -6,4 +6,3 @@ permissions:
     - IRON_SWORD
     - DIAMOND_SWORD
   end:
-    - '*'  # Разрешение на все предметы

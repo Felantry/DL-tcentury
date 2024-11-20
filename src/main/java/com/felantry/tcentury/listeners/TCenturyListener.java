@@ -29,7 +29,6 @@ public class TCenturyListener implements Listener {
         Player player = (Player) event.getView().getPlayer();
         if (!plugin.isItemAllowedInCentury(event.getRecipe().getResult(), plugin.getCurrentCentury(player))) {
             event.getInventory().setResult(null);
-            player.sendMessage("Этот предмет недоступен в вашем веке.");
         }
     }
 }

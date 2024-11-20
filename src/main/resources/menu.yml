@@ -1,0 +1,9 @@
+menu:
+  title: "Century Menu"
+  slots:
+    - id: 0
+      material: STONE
+      name: "Первобытный век"
+      lore:
+        - "ПКМ: Сдать предметы"
+        - "ЛКМ: Проверить оставшееся"
